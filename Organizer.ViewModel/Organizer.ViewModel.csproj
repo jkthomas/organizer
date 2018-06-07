@@ -44,5 +44,11 @@
     <Compile Include="AppViewModel\OrganizerViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Organizer.Helpers\Organizer.Helpers.csproj">
+      <Project>{3040b297-6333-4823-8c36-c5eb3b15a19c}</Project>
+      <Name>Organizer.Helpers</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
