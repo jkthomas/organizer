@@ -15,5 +15,10 @@ namespace Organizer.ViewModel.AppViewModel
             this.Note = note;
             this.IsPrioritized = prioritized;
         }
+
+        public override string ToString()
+        {
+            return this.Note;
+        }
     }
 }

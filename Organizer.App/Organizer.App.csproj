@@ -93,5 +93,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Organizer.Helpers\Organizer.Helpers.csproj">
+      <Project>{3040b297-6333-4823-8c36-c5eb3b15a19c}</Project>
+      <Name>Organizer.Helpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Organizer.ViewModel\Organizer.ViewModel.csproj">
+      <Project>{CD311042-157F-4291-954F-74B381723F03}</Project>
+      <Name>Organizer.ViewModel</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

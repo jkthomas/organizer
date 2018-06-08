@@ -7,6 +7,22 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <ListBox x:Name="Tasks" ItemsSource="{Binding Activities}" HorizontalAlignment="Left" Height="286" Margin="10,67,0,0" VerticalAlignment="Top" Width="772">
+            <ListBox.Style>
+                <Style TargetType="ListBox">
+                    <Setter Property="Background" Value="White"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=SelectedItem.IsPrioritized, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                            <Setter Property="Background" Value="Red"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.Style>
+        </ListBox>
+        <Button Content="Add" Command="{Binding AddActivityCommand}" CommandParameter="{Binding Text, ElementName=NewNote}" HorizontalAlignment="Left" Margin="682,10,0,0" VerticalAlignment="Top" Width="100" Height="52"/>
+        <Button Content="Delete" Command="{Binding DeleteActivityCommand}" CommandParameter="{Binding ElementName=Tasks, Path=SelectedItem}" HorizontalAlignment="Left" Margin="10,358,0,0" VerticalAlignment="Top" Width="100" Height="52"/>
+        <Button Content="Prioritize" Command="{Binding PrioritizeCommand}" CommandParameter="{Binding ElementName=Tasks, Path=SelectedItem}" HorizontalAlignment="Left" Margin="682,358,0,0" VerticalAlignment="Top" Width="100" Height="52"/>
+        <TextBox x:Name="NewNote" HorizontalAlignment="Left" Height="25" Margin="10,23,0,0" TextWrapping="Wrap" Text="Type activity content here..." VerticalAlignment="Top" Width="667"/>
+
     </Grid>
 </Window>
