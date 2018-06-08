@@ -8,16 +8,19 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <ListBox x:Name="Tasks" ItemsSource="{Binding Activities}" HorizontalAlignment="Left" Height="286" Margin="10,67,0,0" VerticalAlignment="Top" Width="772">
-            <ListBox.Style>
-                <Style TargetType="ListBox">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="{x:Type ListBoxItem}">
                     <Setter Property="Background" Value="White"/>
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding Path=SelectedItem.IsPrioritized, UpdateSourceTrigger=PropertyChanged}" Value="True">
-                            <Setter Property="Background" Value="Red"/>
+                        <DataTrigger Binding="{Binding Path=Priority, UpdateSourceTrigger=PropertyChanged}" Value="2">
+                            <Setter Property="ListBoxItem.Background" Value="Yellow"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=Priority, UpdateSourceTrigger=PropertyChanged}" Value="3">
+                            <Setter Property="ListBoxItem.Background" Value="Red"/>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
-            </ListBox.Style>
+            </ListBox.ItemContainerStyle>
         </ListBox>
         <Button Content="Add" Command="{Binding AddActivityCommand}" CommandParameter="{Binding Text, ElementName=NewNote}" HorizontalAlignment="Left" Margin="682,10,0,0" VerticalAlignment="Top" Width="100" Height="52"/>
         <Button Content="Delete" Command="{Binding DeleteActivityCommand}" CommandParameter="{Binding ElementName=Tasks, Path=SelectedItem}" HorizontalAlignment="Left" Margin="10,358,0,0" VerticalAlignment="Top" Width="100" Height="52"/>

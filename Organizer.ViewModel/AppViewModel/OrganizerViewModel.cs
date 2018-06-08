@@ -35,25 +35,27 @@ namespace Organizer.ViewModel.AppViewModel
             this.PrioritizeCommand = new ParameterCommand(this.Prioritize);
             this.AddActivityCommand = new ParameterCommand(this.AddActivity);
             this.DeleteActivityCommand = new ParameterCommand(this.DeleteActivity);
-            this.Activities.Add(new Activity("Hello", true));
-            this.Activities.Add(new Activity("there", false));
         }
 
         public void Prioritize(object activity)
         {
-            if (activity.Equals(null))
+            if (activity == null)
             {
                 //MessageBox
                 return;
             }
             Activity prioritizedActivity = activity as Activity;
             prioritizedActivity = this.Activities.FirstOrDefault(activ => activ.Note == prioritizedActivity.Note);
-            prioritizedActivity.IsPrioritized = true;
+            prioritizedActivity.Priority += 1;
+            if(prioritizedActivity.Priority > 3)
+            {
+                prioritizedActivity.Priority = 1;
+            }
         }
 
         public void AddActivity(object note)
         {
-            if (note.Equals(null))
+            if (note == null)
             {
                 //MessageBox
                 return;
@@ -64,12 +66,12 @@ namespace Organizer.ViewModel.AppViewModel
                 //MessageBox
                 return;
             }
-            this.Activities.Add(new Activity(note.ToString(), false));
+            this.Activities.Add(new Activity(note.ToString(), 1));
         }
 
         public void DeleteActivity(object activity)
         {
-            if (activity.Equals(null))
+            if (activity == null)
             {
                 //MessageBox
                 return;
