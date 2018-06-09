@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Organizer.ViewModel.AppViewModel
@@ -41,7 +42,7 @@ namespace Organizer.ViewModel.AppViewModel
         {
             if (activity == null)
             {
-                //MessageBox
+                MessageBox.Show("No activity selected for prioritization...");
                 return;
             }
             Activity prioritizedActivity = activity as Activity;
@@ -57,13 +58,13 @@ namespace Organizer.ViewModel.AppViewModel
         {
             if (note == null)
             {
-                //MessageBox
+                MessageBox.Show("Activity note field is empty...");
                 return;
             }
 
             if(this.Activities.Any(activ => activ.Note == note.ToString()))
             {
-                //MessageBox
+                MessageBox.Show("Activity with exactly same note already exists...");
                 return;
             }
             this.Activities.Add(new Activity(note.ToString(), 1));
@@ -73,7 +74,7 @@ namespace Organizer.ViewModel.AppViewModel
         {
             if (activity == null)
             {
-                //MessageBox
+                MessageBox.Show("You need to specify activity for deletion...");
                 return;
             }
             Activity activ = activity as Activity;

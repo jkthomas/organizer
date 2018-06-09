@@ -1,0 +1,16 @@
+﻿{
+  "activities": [
+    {
+      "note": "First",
+      "priority": 1
+    },
+    {
+      "note": "Second",
+      "priority": 2
+    },
+    {
+      "note": "Third",
+      "priority": 3
+    }
+  ]
+}
