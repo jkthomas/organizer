@@ -41,8 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppViewModel\Activity.cs" />
+    <Compile Include="AppViewModel\ActivityViewModel.cs" />
     <Compile Include="AppViewModel\OrganizerViewModel.cs" />
+    <Compile Include="Deserializers\InitialDeserializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -52,7 +53,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="activities.json" />
+    <Content Include="activities.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

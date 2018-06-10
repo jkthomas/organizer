@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Organizer.ViewModel.AppViewModel
 {
-    public class Activity : INotifyPropertyChanged
+    public class ActivityViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
         private string _note;
@@ -35,7 +35,7 @@ namespace Organizer.ViewModel.AppViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(nameof(Priority)));
             }
         }
-        public Activity(string note, int priority)
+        public ActivityViewModel(string note, int priority)
         {
             this.Note = note;
             this.Priority = priority;
