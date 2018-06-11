@@ -13,7 +13,6 @@ using System.Windows.Input;
 
 namespace Organizer.ViewModel.AppViewModel
 {
-    //TODO: Create save command and implement
     public class OrganizerViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
@@ -21,6 +20,7 @@ namespace Organizer.ViewModel.AppViewModel
         public ICommand PrioritizeCommand { get; set; }
         public ICommand AddActivityCommand { get; set; }
         public ICommand DeleteActivityCommand { get; set; }
+        public ICommand SaveActivitiesCommand { get; set; }
 
         public ObservableCollection<ActivityViewModel> Activities
         {
@@ -36,53 +36,97 @@ namespace Organizer.ViewModel.AppViewModel
         }
         public OrganizerViewModel()
         {
-            this.Activities = InitialDeserializer.Deserialize(JsonParser.Parse("activities.json"));
+            try
+            {
+                this.Activities = InitialDeserializer.Deserialize(JsonParser.Parse("activities.json"));
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("There was an error when opening activities file: " + e.Message);
+            }
             this.PrioritizeCommand = new ParameterCommand(this.Prioritize);
             this.AddActivityCommand = new ParameterCommand(this.AddActivity);
             this.DeleteActivityCommand = new ParameterCommand(this.DeleteActivity);
+            this.SaveActivitiesCommand = new RelayCommand(this.SaveActivities);
         }
 
         public void Prioritize(object activity)
         {
-            if (activity == null)
+            try
             {
-                MessageBox.Show("No activity selected for prioritization...");
-                return;
+                if (activity == null)
+                {
+                    MessageBox.Show("No activity selected for prioritization...");
+                    return;
+                }
+                ActivityViewModel prioritizedActivity = activity as ActivityViewModel;
+                prioritizedActivity = this.Activities.FirstOrDefault(activ => activ.Note == prioritizedActivity.Note);
+                prioritizedActivity.Priority += 1;
+                if (prioritizedActivity.Priority > 3)
+                {
+                    prioritizedActivity.Priority = 1;
+                }
             }
-            ActivityViewModel prioritizedActivity = activity as ActivityViewModel;
-            prioritizedActivity = this.Activities.FirstOrDefault(activ => activ.Note == prioritizedActivity.Note);
-            prioritizedActivity.Priority += 1;
-            if(prioritizedActivity.Priority > 3)
+            catch (Exception e)
             {
-                prioritizedActivity.Priority = 1;
+                MessageBox.Show("General error occured when prioritizing: " + e.Message);
             }
         }
 
         public void AddActivity(object note)
         {
-            if (note == null)
+            try
             {
-                MessageBox.Show("Activity note field is empty...");
-                return;
-            }
+                if (note == null)
+                {
+                    MessageBox.Show("Activity note field is empty...");
+                    return;
+                }
 
-            if(this.Activities.Any(activ => activ.Note == note.ToString()))
-            {
-                MessageBox.Show("Activity with exactly same note already exists...");
-                return;
+                if (this.Activities.Any(activ => activ.Note == note.ToString()))
+                {
+                    MessageBox.Show("Activity with exactly same note already exists...");
+                    return;
+                }
+                this.Activities.Add(new ActivityViewModel(note.ToString(), 1));
             }
-            this.Activities.Add(new ActivityViewModel(note.ToString(), 1));
+            catch (Exception e)
+            {
+                MessageBox.Show("General error occured when adding acivity: " + e.Message);
+            }
         }
 
         public void DeleteActivity(object activity)
         {
-            if (activity == null)
+            try
             {
-                MessageBox.Show("You need to specify activity for deletion...");
-                return;
+                if (activity == null)
+                {
+                    MessageBox.Show("You need to specify activity for deletion...");
+                    return;
+                }
+                ActivityViewModel activ = activity as ActivityViewModel;
+                this.Activities.Remove(activ);
             }
-            ActivityViewModel activ = activity as ActivityViewModel;
-            this.Activities.Remove(activ);
+            catch (Exception e)
+            {
+                MessageBox.Show("General error occured on activity deletion: " + e.Message);
+            }
+        }
+
+        public void SaveActivities()
+        {
+            try
+            {
+                if (JsonParser.SaveToJson(SaveSerializer.Serialize(this.Activities), "activities.json"))
+                {
+                    MessageBox.Show("Activities saved successfuly");
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Saving problem occured: " + e.Message);
+            }
         }
     }
 }

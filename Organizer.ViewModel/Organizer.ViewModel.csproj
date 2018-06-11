@@ -44,6 +44,7 @@
     <Compile Include="AppViewModel\ActivityViewModel.cs" />
     <Compile Include="AppViewModel\OrganizerViewModel.cs" />
     <Compile Include="Deserializers\InitialDeserializer.cs" />
+    <Compile Include="Deserializers\SaveSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

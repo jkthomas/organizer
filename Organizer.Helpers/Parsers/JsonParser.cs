@@ -21,9 +21,14 @@ namespace Organizer.Helpers.Parsers
             }
         }
 
-        public static bool SaveToJson(OrganizerTemplate organizerTemplate)
+        public static bool SaveToJson(OrganizerTemplate organizerTemplate, string filename)
         {
-            //TODO: Implement
+            JsonSerializer serializer = new JsonSerializer();
+            using (StreamWriter w = new StreamWriter(filename))
+            using (JsonWriter jwriter = new JsonTextWriter(w))
+            {
+                serializer.Serialize(jwriter, organizerTemplate);
+            }
             return true;
         }
     }

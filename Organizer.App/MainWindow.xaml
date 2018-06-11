@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Organizer.App"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="1000" ResizeMode="NoResize">
     <Grid>
-        <ListBox x:Name="Tasks" ItemsSource="{Binding Activities}" HorizontalAlignment="Left" Height="286" Margin="10,67,0,0" VerticalAlignment="Top" Width="772">
+        <ListBox x:Name="Tasks" ItemsSource="{Binding Activities}" HorizontalAlignment="Left" Height="422" Margin="10,67,0,0" VerticalAlignment="Top" Width="974" FontSize="16">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="{x:Type ListBoxItem}">
                     <Setter Property="Background" Value="White"/>
@@ -22,10 +22,11 @@
                 </Style>
             </ListBox.ItemContainerStyle>
         </ListBox>
-        <Button Content="Add" Command="{Binding AddActivityCommand}" CommandParameter="{Binding Text, ElementName=NewNote}" HorizontalAlignment="Left" Margin="682,10,0,0" VerticalAlignment="Top" Width="100" Height="52"/>
-        <Button Content="Delete" Command="{Binding DeleteActivityCommand}" CommandParameter="{Binding ElementName=Tasks, Path=SelectedItem}" HorizontalAlignment="Left" Margin="10,358,0,0" VerticalAlignment="Top" Width="100" Height="52"/>
-        <Button Content="Prioritize" Command="{Binding PrioritizeCommand}" CommandParameter="{Binding ElementName=Tasks, Path=SelectedItem}" HorizontalAlignment="Left" Margin="682,358,0,0" VerticalAlignment="Top" Width="100" Height="52"/>
-        <TextBox x:Name="NewNote" HorizontalAlignment="Left" Height="25" Margin="10,23,0,0" TextWrapping="Wrap" Text="Type activity content here..." VerticalAlignment="Top" Width="667"/>
+        <Button Content="Add" Command="{Binding AddActivityCommand}" CommandParameter="{Binding Text, ElementName=NewNote}" HorizontalAlignment="Left" Margin="884,10,0,0" VerticalAlignment="Top" Width="100" Height="52"/>
+        <Button Content="Delete" Command="{Binding DeleteActivityCommand}" CommandParameter="{Binding ElementName=Tasks, Path=SelectedItem}" HorizontalAlignment="Left" Margin="10,510,0,0" VerticalAlignment="Top" Width="100" Height="52"/>
+        <Button Content="Prioritize" Command="{Binding PrioritizeCommand}" CommandParameter="{Binding ElementName=Tasks, Path=SelectedItem}" HorizontalAlignment="Left" Margin="884,510,0,0" VerticalAlignment="Top" Width="100" Height="52"/>
+        <Button Content="Save" Command="{Binding SaveActivitiesCommand}" HorizontalAlignment="Left" Margin="136,510,0,0" VerticalAlignment="Top" Width="100" Height="52"/>
+        <TextBox x:Name="NewNote" HorizontalAlignment="Left" Height="52" Margin="10,10,0,0" TextWrapping="Wrap" Text="Type activity content here..." VerticalAlignment="Top" Width="850" FontSize="16" MaxLength="231"/>
 
     </Grid>
 </Window>
